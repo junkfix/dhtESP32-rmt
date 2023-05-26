@@ -2,28 +2,9 @@
 #include "dhtESP32-rmt.h"
 
 uint8_t read_dht(float &temperature, float &humidity, uint8_t pin, uint8_t dhttype, uint8_t rx){
-	//check last read
-	static int devices = 0;
-	static struct pin_grp {
-		uint8_t id;
-		unsigned long lastRead;
-	} pins[1];
-	int pinid = -1;
-	for(int i = 0; i < devices; i++){if(pins[i].id == pin){pinid = i; break;}}
-	if(pinid == -1){
-		pin_grp *tmp_pin = new pin_grp[devices + 1];
-		for(int i = 0; i < devices; i++){tmp_pin[i] = pins[i];}
-		tmp_pin[devices].id = pin;
-		tmp_pin[devices].lastRead = 0;
-		delete[] pins;
-		pins = tmp_pin;
-		devices++;
-	}
-	if(millis() - pins[pinid].lastRead < (dhttype == DHT22 ? 2000 : 1000) && pins[pinid].lastRead){
-		return DHT_TOO_SOON;
-	}
-	pins[pinid].lastRead = millis();
-	//end
+	static unsigned long lastread = 0;
+	if(millis() - lastread < (dhttype == DHT22 ? 2000 : 1000) && lastread){return DHT_TOO_SOON;}
+	lastread = millis();
 	
 	gpio_num_t dhtpin = static_cast<gpio_num_t>(pin);
 	rmt_channel_t dhtrx = static_cast<rmt_channel_t>(rx);
