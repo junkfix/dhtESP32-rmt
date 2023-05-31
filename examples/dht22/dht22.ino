@@ -18,7 +18,7 @@ void tempTask(void *pvParameters){
 		vTaskDelay(3000 / portTICK_PERIOD_MS);
 	}
 }
-/* tempTask */
+*/
 
 void setup() {
 	delay(1000);
