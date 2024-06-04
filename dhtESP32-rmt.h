@@ -1,8 +1,12 @@
-// https://github.com/htmltiger/dhtESP32-rmt
+// https://github.com/junkfix/dhtESP32-rmt
 #pragma once
 
 #include <Arduino.h>
-#include "driver/rmt.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "freertos/queue.h"
+#include "driver/rmt_rx.h"
+#include "driver/gpio.h"
 
 #define DHT11	0
 #define DHT21	1
@@ -20,4 +24,6 @@
 #define DHT_UNDERFLOW	7
 #define DHT_OVERFLOW	8
 
-uint8_t read_dht(float &temperature, float &humidity, uint8_t pin, uint8_t dhttype = DHT22, uint8_t rx= 1);
+uint8_t read_dht(float &temperature, float &humidity, uint8_t pin, uint8_t dhttype);
+
+bool dhtrx_done(rmt_channel_handle_t channel, const rmt_rx_done_event_data_t *edata, void *udata);
