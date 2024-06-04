@@ -100,7 +100,7 @@ uint8_t read_dht(float &temperature, float &humidity, uint8_t pin, uint8_t dhtty
 	return error;
 }
 
-bool dhtrx_done(rmt_channel_handle_t ch, const rmt_rx_done_event_data_t *edata, void *udata){
+bool IRAM_ATTR dhtrx_done(rmt_channel_handle_t ch, const rmt_rx_done_event_data_t *edata, void *udata){
 	BaseType_t w = pdFALSE;
 	QueueHandle_t d = (QueueHandle_t)udata;
 	xQueueSendFromISR(d, edata, &w);
