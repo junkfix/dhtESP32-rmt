@@ -1,4 +1,4 @@
-// https://github.com/htmltiger/dhtESP32-rmt
+// https://github.com/junkfix/dhtESP32-rmt
 
 #include <dhtESP32-rmt.h>
 
@@ -8,7 +8,7 @@ float humidity = 0.0;
 /*
 void tempTask(void *pvParameters){
 	for(;;){
-		uint8_t error=read_dht(temperature, humidity, 13, DHT22, 1);
+		uint8_t error=read_dht(temperature, humidity, 13, DHT22);
 		if(error){
 			Serial.println(error);
 		}else{
@@ -27,8 +27,8 @@ void setup() {
 }
 
 void loop() {
-	//read_dht(temperature, humidity, pin, type (DHT11, DHT21, DHT22, AM2301, AM2302), RMT channel (0-7) 
-	uint8_t error=read_dht(temperature, humidity, 13, DHT22, 0);
+	//read_dht( temperature, humidity, pin, type (DHT11, DHT21, DHT22, AM2301, AM2302) )
+	uint8_t error=read_dht(temperature, humidity, 13, DHT22);
 	if(error){
 		Serial.println(error);
 	}else{
