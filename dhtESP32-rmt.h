@@ -26,4 +26,4 @@
 
 uint8_t read_dht(float &temperature, float &humidity, uint8_t pin, uint8_t dhttype);
 
-bool dhtrx_done(rmt_channel_handle_t channel, const rmt_rx_done_event_data_t *edata, void *udata);
+bool IRAM_ATTR dhtrx_done(rmt_channel_handle_t channel, const rmt_rx_done_event_data_t *edata, void *udata);
