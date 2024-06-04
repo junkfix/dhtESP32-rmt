@@ -9,10 +9,6 @@ The example is provided and tested using Arduino 3.0.0 based on ESP-IDF 5.1.4
 
 * Version 1.x is for Arduino 2.x based on ESP-IDF 4.x
 * Version 2.x is for Arduino 3.0.0 based on ESP-IDF 5.1.4
-
-The new RMT driver does not require channel, please remove the last parameter from read_dht() if you are upgrading.
-Also you cannot use deprecated rmt.h and rmt_rx.h (idf 5.x) together as it will cause bootloop.
-
 ---
 
 <a href="https://www.buymeacoffee.com/htmltiger"><img src="https://www.buymeacoffee.com/assets/img/custom_images/white_img.png" alt="Buy Me A Coffee"></a>
