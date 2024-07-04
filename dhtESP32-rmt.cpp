@@ -3,10 +3,16 @@
 #include <Arduino.h>
 #include "dhtESP32-rmt.h"
 
+#if CONFIG_IDF_TARGET_ESP32 || CONFIG_IDF_TARGET_ESP32S2
+#define MAX_BLOCKS	64
+#else
+#define MAX_BLOCKS	48
+#endif
+
 uint8_t read_dht(float &temperature, float &humidity, uint8_t pin, uint8_t dhttype) {
 	gpio_num_t dhtpin = static_cast<gpio_num_t>(pin);
 	rmt_channel_handle_t rx_channel = NULL;
-	rmt_symbol_word_t symbols[64];
+	rmt_symbol_word_t symbols[MAX_BLOCKS];
 	rmt_rx_done_event_data_t rx_data;
 	
 	rmt_receive_config_t rx_config = {
@@ -18,7 +24,7 @@ uint8_t read_dht(float &temperature, float &humidity, uint8_t pin, uint8_t dhtty
 		.gpio_num = dhtpin,
 		.clk_src = RMT_CLK_SRC_DEFAULT,
 		.resolution_hz = 1000000,
-		.mem_block_symbols = 64,
+		.mem_block_symbols = MAX_BLOCKS,
 	};
 	uint8_t error = DHT_OK;
 	if(rmt_new_rx_channel(&rx_ch_conf, &rx_channel) != ESP_OK) {
