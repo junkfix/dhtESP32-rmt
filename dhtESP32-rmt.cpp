@@ -2,6 +2,7 @@
 
 #include <Arduino.h>
 #include "dhtESP32-rmt.h"
+#include "sdkconfig.h"
 
 #if CONFIG_IDF_TARGET_ESP32 || CONFIG_IDF_TARGET_ESP32S2
 #define MAX_BLOCKS	64
